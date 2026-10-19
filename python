@@ -1,0 +1,34 @@
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+from imblearn.over_sampling import SMOTE
+
+def clean_and_preprocess_data(df):
+    """
+    Week 2: Data Cleaning, Outlier Capping, Feature Engineering, and SMOTE
+    """
+    # 1. Handle missing values
+    df = df.dropna().copy()
+
+    # 2. Outlier capping (IQR method on numerical features)
+    numeric_cols = df.select_dtypes(include=[np.number]).columns
+    for col in numeric_cols:
+        if col != 'Churn':
+            Q1 = df[col].quantile(0.25)
+            Q3 = df[col].quantile(0.75)
+            IQR = Q3 - Q1
+            df[col] = np.clip(df[col], Q1 - 1.5 * IQR, Q3 + 1.5 * IQR)
+
+    # 3. Encode categorical columns
+    df = pd.get_dummies(df, drop_first=True)
+
+    return df
+
+def balance_classes(X, y):
+    """Apply SMOTE to handle class imbalance in churn dataset."""
+    smote = SMOTE(random_state=42)
+    X_resampled, y_resampled = smote.fit_resample(X, y)
+    return X_resampled, y_resampled
+
+if __name__ == "__main__":
+    print("Week 2 Data Preprocessing pipeline ready.")
