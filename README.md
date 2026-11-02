@@ -93,3 +93,14 @@ cd ecommerce-customer-churn-prediction
 # Install dependencies
 pip install -r requirements.txt
 ```
+# Customer Churn Prediction: Execution & Implementation Pipeline
+**Role:** Data Science Project Coordinator (Week 3 Task)
+
+## Overview
+End-to-end Python machine learning execution pipeline utilizing `scikit-learn` ColumnTransformers, `StratifiedKFold` cross-validation, automated `pytest` unit tests, and ethical AI bias/SHAP auditing.
+
+## Project Structure
+- `src/train_pipeline.py`: Annotated preprocessing, feature scaling, encoding, and Random Forest GridSearchCV pipeline.
+- `tests/test_pipeline.py`: Automated unit and schema validation tests using `pytest`.
+- `requirements.txt`: Python package dependencies.
+
